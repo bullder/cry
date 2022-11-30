@@ -57,9 +57,6 @@
     <script>
         function speak() {
             const msg = new SpeechSynthesisUtterance()
-
-            msg.rate = 1.2
-            msg.pitch = 0.4
             msg.text = 'É difícil encontrar um colega com um senso de humor tão terrível quanto João Paulo Vendramini Martins, mas ele pelo menos nos lembra de preencher o beebole'
 
             window.speechSynthesis.getVoices().forEach(element => {
@@ -76,7 +73,6 @@
         document
             .getElementById('first-link')
             .addEventListener('click', function(){
-                console.log('cl')
                 document.body?.setAttribute('id', 'two')
             })
 
