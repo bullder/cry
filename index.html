@@ -1,1 +1,96 @@
-<h2>cry</h2>
+
+<!doctype html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@1,700&display=swap" rel="stylesheet">
+    
+    <style>
+        @keyframes wiggle {
+            0% {transform: translate(2px, 1px)}
+            10% {transform: translate(-1px, -2px)}
+            20% {transform: translate(-3px, 0px)}
+            30% {transform: translate(0px, 2px)}
+            40% {transform: translate(1px, -1px)}
+            50% {transform: translate(-1px, 2px)}
+            60% {transform: translate(-3px, 1px)}
+            70% {transform: translate(2px, 1px)}
+            80% {transform: translate(-1px, -1px)}
+            90% {transform: translate(1px, -2px)}
+            100% {transform: translate(2px, 1px)}
+        }
+
+        body {background: url(bg.gif); background-color: red; text-align: center; padding: 5%; max-height: 100%;}
+
+        #first {height: 100%; width: 100%;}
+        #img-cnt {position: relative}
+        #first img {width: 500px; position: absolute; margin: auto; top: 0; text-align: center; margin-left: -250px;}
+
+        #cry {animation: 1s wiggle infinite; z-index: 1}
+        #drop {z-index: 3}
+
+        h2 {font-family: 'Comic Neue', cursive;font-size: 50pt;}
+
+        body#two {background: none; background-color: black; text-align: center; padding: 5%; max-height: 100%;}
+        #dance {width: 60%;}
+
+        #two #first{display: none}
+        #second{display: none}
+        #two #second{display: block}
+        #second h2 {color:white}
+    </style>
+</head>
+<body>
+    <div id="first">
+        <h2>Stop me crying! <br /><a href="#" id="first-link">Click on ME!</a></h2>
+        <div id="img-cnt">
+            <img id="cry" src="jp.png">
+            <img id="drop" src="drop.png">
+        </div>
+    </div>
+
+    <div id="second">
+        <h2>It is Beebole day! <br /><a href="#">Lets celebrate it!!</a></h2>
+        <img id="dance" src="dance.gif">
+    </div>
+    <script>
+        function speak() {
+            const msg = new SpeechSynthesisUtterance()
+
+            msg.rate = 1.2
+            msg.pitch = 0.4
+            msg.text = 'É difícil encontrar um colega com um senso de humor tão terrível quanto João Paulo Vendramini Martins, mas ele pelo menos nos lembra de preencher o beebole'
+
+            window.speechSynthesis.getVoices().forEach(element => {
+                if ('pt-BR' === element.lang) {
+                    msg.voice = element;
+                }
+            });
+            
+            window.speechSynthesis.speak(msg)
+            window.open('https://beebole-apps.com/#home', '_blank').focus();
+
+        }
+
+        document
+            .getElementById('first-link')
+            .addEventListener('click', function(){
+                console.log('cl')
+                document.body?.setAttribute('id', 'two')
+            })
+
+        document
+            .getElementById('second')
+            .addEventListener('click', function(){
+                const voices = window.speechSynthesis.getVoices()
+                if (!voices.length) {
+                    setTimeout(function(){speak()}, 500)
+                } else {
+                    speak()
+                }
+                
+            })
+    </script>
+</body>
+</html>
